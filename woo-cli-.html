@@ -1,2 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WP-CLI WooCommerce Command Builder</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            padding: 20px;
+            background-color: #f4f4f4;
+        }
+        h1 {
+            text-align: center;
+        }
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: white;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        .field-group {
+            margin-bottom: 20px;
+        }
+        .field-group label {
+            display: block;
+            margin-bottom: 5px;
+        }
+        .field-group input, .field-group select {
+            width: 100%;
+            padding: 8px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+        }
+        .field-group button {
+            padding: 10px 15px;
+            background-color: #0073aa;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        .field-group button:hover {
+            background-color: #005f87;
+        }
+        .output {
+            margin-top: 20px;
+            padding: 15px;
+            background-color: #e7f5ff;
+            border: 1px solid #c3d9e1;
+            border-radius: 5px;
+            font-family: monospace;
+            white-space: pre-wrap;
+        }
+    </style>
+</head>
+<body>
 
-
+    <h1>WP-CLI WooCommerce Command Builder</h1>
+
+    <div class="container">
+        <div class="field-group">
+            <label for="action">Select Action:</label>
+            <select id="action">
+                <option value="create_product">Create Product</option>
+                <option value="update_product">Update Product</option>
+                <option value="delete_product">Delete Product</option>
+                <option value="get_orders">Get Orders</option>
+            </select>
+        </div>
+
+        <div class="field-group">
+            <label for="product_name">Product Name (if applicable):</label>
+            <input type="text" id="product_name" placeholder="Enter product name">
+        </div>
+
+        <div class="field-group">
+            <label for="product_price">Product Price (if applicable):</label>
+            <input type="text" id="product_price" placeholder="Enter product price">
+        </div>
+
+        <div class="field-group">
+            <label for="product_sku">Product SKU (if applicable):</label>
+            <input type="text" id="product_sku" placeholder="Enter product SKU">
+        </div>
+
+        <div class="field-group">
+            <label for="order_status">Order Status (if applicable):</label>
+            <input type="text" id="order_status" placeholder="Enter order status (e.g., completed)">
+        </div>
+
+        <div class="field-group">
+            <button id="generateCommand">Generate Command</button>
+        </div>
+
+        <div class="output" id="output">
+            <!-- Generated command will appear here -->
+        </div>
+    </div>
+
+    <script>
+        document.getElementById('generateCommand').addEventListener('click', function() {
+            const action = document.getElementById('action').value;
+            const productName = document.getElementById('product_name').value;
+            const productPrice = document.getElementById('product_price').value;
+            const productSku = document.getElementById('product_sku').value;
+            const orderStatus = document.getElementById('order_status').value;
+
+            let command = 'wp wc ';
+
+            switch (action) {
+                case 'create_product':
+                    command += `product create --name="${productName}" --price="${productPrice}" --sku="${productSku}"`;
+                    break;
+
+                case 'update_product':
+                    command += `product update --sku="${productSku}" --name="${productName}" --price="${productPrice}"`;
+                    break;
+
+                case 'delete_product':
+                    command += `product delete --sku="${productSku}"`;
+                    break;
+
+                case 'get_orders':
+                    command += `order list --status="${orderStatus}"`;
+                    break;
+
+                default:
+                    command = 'Invalid action selected';
+            }
+
+            document.getElementById('output').textContent = command;
+        });
+    </script>
+
+</body>
+</html>
+
