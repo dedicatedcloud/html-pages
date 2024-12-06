@@ -1,2 +1,602 @@
 
-
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Royal Mail Shipping Calculator</title>
+    <!-- <link rel="stylesheet" href="style.css"> -->
+    <style>
+        .manrope-select {
+            font-family: "Manrope", sans-serif;
+            font-optical-sizing: auto;
+            font-weight: 500px;
+            font-style: normal;
+        }
+
+        #shipping-calculator {
+            font-family: "Manrope", sans-serif;
+            max-width: 300px;
+            margin: 20px auto;
+            padding: 20px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            background: #f9f9f9;
+        }
+
+        #shipping-calculator h2 {
+            text-align: center;
+        }
+
+        #shipping-calculator form {
+            display: flex;
+            flex-direction: column;
+        }
+
+        #shipping-calculator label {
+            margin-bottom: 5px;
+        }
+
+        #shipping-calculator select,
+        #shipping-calculator button {
+            margin-bottom: 15px;
+            padding: 8px;
+            font-size: 1em;
+        }
+
+        #shipping-calculator button {
+            background: red;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        #shipping-calculator button:hover {
+            background: #11e331;
+        }
+
+        #result {
+            text-align: center;
+            margin-top: 20px;
+        }
+
+        #result h3 {
+            margin-bottom: 5px;
+        }
+
+        /* .select2-container {
+            width: 100% !important;
+        }
+*/
+        #shipping-calculator select {
+            margin-bottom: 20px;
+        }
+    </style>
+    <!-- <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script> -->
+    <!-- <link rel=stylesheet href=https://cdn.simplecss.org/simple.css> -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.1.0-beta.1/css/select2.min.css" rel="stylesheet" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@200..800&family=Outfit:wght@100..900&display=swap"
+        rel="stylesheet">
+
+    <!-- Select2 CSS -->
+
+
+</head>
+
+<body>
+    <div id="shipping-calculator">
+        <h2>Royal Mail Shipping Calculator</h2>
+        <form id="calculator-form">
+            <label for="zone">Destination Zone:</label>
+            <select class="js-example-basic-single" id="zone" name="zone">
+                <option value="219" selected="">UK - Mainland</option>
+                <option value="249">Northern Ireland</option>
+                <option value="254">Scottish Highlands and Islands</option>
+                <option value="26">Ireland</option>
+                <option value="217">USA</option>
+                <option value="1">Australia</option>
+                <option value="2">China</option>
+                <option value="218">Canada</option>
+                <option value="22">France</option>
+                <option value="23">Germany</option>
+                <option value="99">Greece</option>
+                <option value="27">Italy</option>
+                <option value="31">Poland</option>
+                <option value="32">Portugal</option>
+                <option value="33">Spain (Mainland Only)</option>
+                <option disabled="">---------------------</option>
+                <option value="35">Albania</option>
+                <option value="36">Algeria</option>
+                <option value="38">American Samoa</option>
+                <option value="37">Andorra</option>
+                <option value="39">Angola</option>
+                <option value="40">Anguilla</option>
+                <option value="41">Antigua</option>
+                <option value="42">Argentina</option>
+                <option value="43">Armenia</option>
+                <option value="44">Aruba</option>
+                <option value="1">Australia</option>
+                <option value="16">Austria</option>
+                <option value="45">Azerbaijan</option>
+                <option value="255">Azores</option>
+                <option value="46">Bahamas</option>
+                <option value="47">Bahrain</option>
+                <option value="226">Balearic Islands</option>
+                <option value="48">Bangladesh</option>
+                <option value="49">Barbados</option>
+                <option value="50">Belarus</option>
+                <option value="17">Belgium</option>
+                <option value="51">Belize</option>
+                <option value="52">Benin</option>
+                <option value="53">Bermuda</option>
+                <option value="54">Bhutan</option>
+                <option value="55">Bolivia</option>
+                <option value="56">Bonaire</option>
+                <option value="220">Bosnia</option>
+                <option value="57">Bosnia Herzegovina</option>
+                <option value="58">Botswana</option>
+                <option value="59">Brazil</option>
+                <option value="231">British Virgin Islands</option>
+                <option value="60">Brunei</option>
+                <option value="61">Bulgaria</option>
+                <option value="62">Burkina Faso</option>
+                <option value="63">Burundi</option>
+                <option value="64">Cambodia</option>
+                <option value="65">Cameroon</option>
+                <option value="218">Canada</option>
+                <option value="66">Canary Islands</option>
+                <option value="67">Cape Verde Islands</option>
+                <option value="68">Cayman Islands</option>
+                <option value="69">Central African Republic</option>
+                <option value="256">Ceuta</option>
+                <option value="70">Chad</option>
+                <option value="71">Channel Islands</option>
+                <option value="72">Chile</option>
+                <option value="2">China</option>
+                <option value="73">Colombia</option>
+                <option value="74">Comoros Islands</option>
+                <option value="75">Congo</option>
+                <option value="234">Cook Islands</option>
+                <option value="235">Costa Rica</option>
+                <option value="225">Crete</option>
+                <option value="76">Croatia</option>
+                <option value="78">Curacao</option>
+                <option value="79">Cyprus</option>
+                <option value="19">Czech Republic</option>
+                <option value="214">Democratic Republic of Congo</option>
+                <option value="20">Denmark</option>
+                <option value="80">Djibouti</option>
+                <option value="81">Dominica</option>
+                <option value="82">Dominican Republic</option>
+                <option value="237">East Timor</option>
+                <option value="83">Ecuador</option>
+                <option value="84">Egypt</option>
+                <option value="264">El Hierro</option>
+                <option value="85">El Salvador</option>
+                <option value="86">Equatorial Guinea</option>
+                <option value="87">Eritrea</option>
+                <option value="88">Estonia</option>
+                <option value="189">Eswatini</option>
+                <option value="89">Ethiopia</option>
+                <option value="90">Falkland Islands</option>
+                <option value="91">Faroe Islands</option>
+                <option value="92">Fiji</option>
+                <option value="21">Finland</option>
+                <option value="22">France</option>
+                <option value="93">French Guiana</option>
+                <option value="238">French Polynesia</option>
+                <option value="261">Fuerteventura</option>
+                <option value="94">Gabon</option>
+                <option value="95">Gambia</option>
+                <option value="96">Georgia</option>
+                <option value="23">Germany</option>
+                <option value="98">Gibraltar</option>
+                <option value="259">Gran Canaria</option>
+                <option value="99">Greece</option>
+                <option value="100">Greenland</option>
+                <option value="101">Grenada</option>
+                <option value="102">Guadeloupe</option>
+                <option value="103">Guam</option>
+                <option value="104">Guatemala</option>
+                <option value="24">Guernsey</option>
+                <option value="106">Guinea</option>
+                <option value="105">Guinea-Bissau</option>
+                <option value="107">Guyana</option>
+                <option value="108">Haiti</option>
+                <option value="109">Honduras Republic</option>
+                <option value="3">Hong Kong</option>
+                <option value="25">Hungary</option>
+                <option value="227">Ibiza</option>
+                <option value="110">Iceland</option>
+                <option value="4">India</option>
+                <option value="5">Indonesia</option>
+                <option value="239">Iraq Republic</option>
+                <option value="26">Ireland</option>
+                <option value="268">Isle of Man</option>
+                <option value="112">Israel</option>
+                <option value="27">Italy</option>
+                <option value="114">Jamaica</option>
+                <option value="6">Japan</option>
+                <option value="28">Jersey</option>
+                <option value="115">Jordan</option>
+                <option value="116">Kazakhstan</option>
+                <option value="117">Kenya</option>
+                <option value="118">Kiribati</option>
+                <option value="119">Kuwait</option>
+                <option value="263">La Gomera</option>
+                <option value="262">La Palma</option>
+                <option value="260">Lanzarote</option>
+                <option value="121">Laos</option>
+                <option value="122">Latvia</option>
+                <option value="123">Lebanon</option>
+                <option value="124">Lesotho</option>
+                <option value="125">Liberia</option>
+                <option value="126">Libya</option>
+                <option value="127">Liechtenstein</option>
+                <option value="128">Lithuania</option>
+                <option value="29">Luxembourg</option>
+                <option value="129">Macau</option>
+                <option value="131">Madagascar</option>
+                <option value="265">Madeira</option>
+                <option value="228">Majorca</option>
+                <option value="132">Malawi</option>
+                <option value="9">Malaysia</option>
+                <option value="133">Maldives</option>
+                <option value="134">Mali</option>
+                <option value="135">Malta</option>
+                <option value="136">Marshall Islands</option>
+                <option value="137">Martinique</option>
+                <option value="138">Mauritania</option>
+                <option value="139">Mauritius</option>
+                <option value="251">Mayotte</option>
+                <option value="257">Melilla</option>
+                <option value="229">Menorca</option>
+                <option value="140">Mexico</option>
+                <option value="240">Micronesia</option>
+                <option value="221">Moldova</option>
+                <option value="142">Monaco</option>
+                <option value="143">Mongolia</option>
+                <option value="253">Montenegro</option>
+                <option value="144">Montserrat</option>
+                <option value="145">Morocco</option>
+                <option value="146">Mozambique</option>
+                <option value="147">Myanmar</option>
+                <option value="148">Namibia</option>
+                <option value="149">Nauru</option>
+                <option value="150">Nepal</option>
+                <option value="30">Netherlands</option>
+                <option value="241">Netherlands Antilles</option>
+                <option value="152">New Caledonia</option>
+                <option value="10">New Zealand</option>
+                <option value="153">Nicaragua</option>
+                <option value="154">Niger</option>
+                <option value="156">Niue</option>
+                <option value="130">North Macedonia</option>
+                <option value="249">Northern Ireland</option>
+                <option value="157">Norway</option>
+                <option value="158">Oman</option>
+                <option value="11">Pakistan</option>
+                <option value="242">Palau</option>
+                <option value="243">Palestine Authority</option>
+                <option value="159">Panama</option>
+                <option value="160">Papua New Guinea</option>
+                <option value="161">Paraguay</option>
+                <option value="162">Peru</option>
+                <option value="12">Philippines</option>
+                <option value="31">Poland</option>
+                <option value="32">Portugal</option>
+                <option value="163">Puerto Rico</option>
+                <option value="164">Qatar</option>
+                <option value="165">Reunion, Islands Of</option>
+                <option value="166">Romania</option>
+                <option value="167">Russia</option>
+                <option value="168">Rwanda</option>
+                <option value="169">Saipan</option>
+                <option value="244">Samoa</option>
+                <option value="252">San Marino</option>
+                <option value="267">Sardinia</option>
+                <option value="171">Saudi Arabia</option>
+                <option value="172">Senegal</option>
+                <option value="222">Serbia</option>
+                <option value="173">Seychelles</option>
+                <option value="266">Sicily</option>
+                <option value="174">Sierra Leone</option>
+                <option value="13">Singapore</option>
+                <option value="223">Slovak Republic</option>
+                <option value="176">Slovenia</option>
+                <option value="177">Solomon Islands</option>
+                <option value="179">South Africa</option>
+                <option value="245">South Korea</option>
+                <option value="33">Spain (Mainland Only)</option>
+                <option value="180">Sri Lanka</option>
+                <option value="181">St. Barthelemy</option>
+                <option value="182">St. Eustatius</option>
+                <option value="183">St. Kitts</option>
+                <option value="184">St. Lucia</option>
+                <option value="185">St. Maarten</option>
+                <option value="186">St. Vincent</option>
+                <option value="188">Suriname</option>
+                <option value="34">Sweden</option>
+                <option value="190">Switzerland</option>
+                <option value="14">Taiwan</option>
+                <option value="193">Tajikistan</option>
+                <option value="194">Tanzania</option>
+                <option value="258">Tenerife</option>
+                <option value="15">Thailand</option>
+                <option value="195">Togo</option>
+                <option value="196">Tonga</option>
+                <option value="197">Trinidad &amp; Tobago</option>
+                <option value="246">Tunisia</option>
+                <option value="198">Turkey</option>
+                <option value="199">Turkmenistan</option>
+                <option value="200">Turks &amp; Caicos Islands</option>
+                <option value="201">Tuvalu</option>
+                <option value="202">Uganda</option>
+                <option value="254">Scottish Highlands and Islands</option>
+                <option value="203">Ukraine</option>
+                <option value="247">United Arab Emirates</option>
+                <option value="uk" selected="">UK - Mainland</option><!--219-->
+                <option value="205">Uruguay</option>
+                <option value="217">USA</option>
+                <option value="206">Uzbekistan</option>
+                <option value="207">Vanuatu</option>
+                <option value="224">Vatican City</option>
+                <option value="208">Venezuela</option>
+                <option value="209">Vietnam</option>
+                <option value="210">US Virgin Islands</option>
+                <option value="248">Wallis and Futuna</option>
+                <option value="212">Yemen</option>
+                <option value="215">Zambia</option>
+                <option value="216">Zimbabwe</option>
+        
+                <!-- <option value="uk">UK</option>
+                <option value="europe-1">Europe Zone 1</option>
+                <option value="europe-2">Europe Zone 2</option>
+                <option value="europe-3">Europe Zone 3</option>
+                <option value="world-1">World Zone 1</option>
+                <option value="world-2">World Zone 2</option>
+                <option value="world-3">World Zone 3</option> -->
+
+            </select>
+            <label for="service">Service:</label>
+            <select id="service" name="service">
+                <option value="first-class">First Class</option>
+                <option value="second-class">Second Class</option>
+                <option value="first-class-sf">First Class Signed For</option>
+                <option value="second-class-sf">Second Class Signed For</option>
+                <option value="tracked-24">Tracked 24</option>
+                <option value="tracked-48">Tracked 48</option>
+                <option value="gb1-750">Guaranteed by 1pm® £750</option>
+                <option value="gb1-1000">Guaranteed by 1pm® £1000</option>
+                <option value="gb1-2500">Guaranteed by 1pm® £2500</option>
+
+            </select>
+
+            <label for="package-type">Package Type:</label>
+            <select id="package-type" name="package-type">
+                <option value="letter-100g">Letter (100g)</option>
+                <option value="large-letter-100g">Large Letter (100g)</option>
+                <option value="large-letter-250g">Large Letter (250g)</option>
+                <option value="large-letter-500g">Large Letter (500g)</option>
+                <option value="large-letter-750g">Large Letter (750g)</option>
+                <option value="small-parcel-1kg">Small Parcel (1kg)</option>
+                <option value="small-parcel-2kg">Small Parcel (2kg)</option>
+                <option value="medium-parcel-1kg">Medium Parcel (1kg)</option>
+                <option value="medium-parcel-2kg">Medium Parcel (2kg)</option>
+                <option value="medium-parcel-10kg">Medium Parcel (10kg)</option>
+                <option value="medium-parcel-20kg">Medium Parcel (20kg)</option>
+            </select>
+
+            <button type="submit">Calculate</button>
+        </form>
+        <div id="result"></div>
+    </div>
+
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            // Initialize Select2 for dropdowns
+            $(document).ready(function () {
+                $('#zone').select2({
+                    placeholder: "Select a zone",
+                    allowClear: true
+                });
+                $('#service').select2({
+                    placeholder: "Select a service",
+                    allowClear: true
+                });
+                $('#package-type').select2({
+                    placeholder: "Select a package type",
+                    allowClear: true
+                });
+            });
+
+
+
+            // Rates for each zone, service, and weight band
+            const rates = {
+                uk: {
+                    "first-class": {
+                        "letter-100g": 1.65,
+                        "large-letter-100g": 2.60,
+                        "large-letter-250g": 3.50,
+                        "large-letter-500g": 3.50,
+                        "large-letter-750g": 3.50,
+                        "small-parcel-2kg": 4.79,
+                        "medium-parcel-2kg": 6.99,
+                        "medium-parcel-10kg": 8.69,
+                        "medium-parcel-20kg": 13.19,
+                    },
+                    "second-class": {
+                        "letter-100g": 0.85,
+                        "large-letter-100g": 1.55,
+                        "large-letter-250g": 2.10,
+                        "large-letter-500g": 2.50,
+                        "large-letter-750g": 2.70,
+                        "small-parcel-2kg": 3.69,
+                        "medium-parcel-2kg": 5.89,
+                        "medium-parcel-10kg": 7.39,
+                        "medium-parcel-20kg": 10.99,
+                    },
+                    "first-class-sf": {
+                        "letter-100g": 1.65,
+                        "large-letter-100g": 2.60,
+                        "large-letter-250g": 3.50,
+                        "large-letter-500g": 3.50,
+                        "large-letter-750g": 3.50,
+                        "small-parcel-2kg": 4.79,
+                        "medium-parcel-2kg": 6.99,
+                        "medium-parcel-10kg": 8.69,
+                        "medium-parcel-20kg": 13.19,
+                    },
+                    "second-class-sf": {
+                        "letter-100g": 0.85,
+                        "large-letter-100g": 1.55,
+                        "large-letter-250g": 2.10,
+                        "large-letter-500g": 2.50,
+                        "large-letter-750g": 2.70,
+                        "small-parcel-2kg": 3.69,
+                        "medium-parcel-2kg": 5.89,
+                        "medium-parcel-10kg": 7.39,
+                        "medium-parcel-20kg": 10.99,
+                    },
+                    "tracked-24": {
+                        "letter-100g": 1.65,
+                        "large-letter-100g": 2.60,
+                        "large-letter-250g": 3.50,
+                        "large-letter-500g": 3.50,
+                        "large-letter-750g": 3.50,
+                        "small-parcel-2kg": 4.79,
+                        "medium-parcel-2kg": 6.99,
+                        "medium-parcel-10kg": 8.69,
+                        "medium-parcel-20kg": 13.19,
+                    },
+                    "tracked-48": {
+                        "letter-100g": 0.85,
+                        "large-letter-100g": 1.55,
+                        "large-letter-250g": 2.10,
+                        "large-letter-500g": 2.50,
+                        "large-letter-750g": 2.70,
+                        "small-parcel-2kg": 3.69,
+                        "medium-parcel-2kg": 5.89,
+                        "medium-parcel-10kg": 7.39,
+                        "medium-parcel-20kg": 10.99,
+                    },
+                    "gb1-750": {
+                        "letter-100g": 0.85,
+                        "large-letter-100g": 1.55,
+                        "large-letter-250g": 2.10,
+                        "large-letter-500g": 2.50,
+                        "large-letter-750g": 2.70,
+                        "small-parcel-2kg": 3.69,
+                        "medium-parcel-2kg": 5.89,
+                        "medium-parcel-10kg": 7.39,
+                        "medium-parcel-20kg": 10.99,
+                    },
+                    "gb1-1000": {
+                        "letter-100g": 0.85,
+                        "large-letter-100g": 1.55,
+                        "large-letter-250g": 2.10,
+                        "large-letter-500g": 2.50,
+                        "large-letter-750g": 2.70,
+                        "small-parcel-2kg": 3.69,
+                        "medium-parcel-2kg": 5.89,
+                        "medium-parcel-10kg": 7.39,
+                        "medium-parcel-20kg": 10.99,
+                    },
+                    "gb1-2500": {
+                        "letter-100g": 0.85,
+                        "large-letter-100g": 1.55,
+                        "large-letter-250g": 2.10,
+                        "large-letter-500g": 2.50,
+                        "large-letter-750g": 2.70,
+                        "small-parcel-2kg": 3.69,
+                        "medium-parcel-2kg": 5.89,
+                        "medium-parcel-10kg": 7.39,
+                        "medium-parcel-20kg": 10.99,
+                    },
+                },
+                "europe-1": {
+                    "first-class": {
+                        "letter-100g": 2.00,
+                        "large-letter-100g": 3.00,
+                        "large-letter-250g": 4.00,
+                        "large-letter-500g": 5.00,
+                        "large-letter-750g": 6.00,
+                        "small-parcel-2kg": 8.00,
+                        "medium-parcel-2kg": 10.00,
+                        "medium-parcel-10kg": 15.00,
+                        "medium-parcel-20kg": 20.00,
+                    },
+                    "second-class": {
+                        "letter-100g": 1.50,
+                        "large-letter-100g": 2.50,
+                        "large-letter-250g": 3.50,
+                        "large-letter-500g": 4.50,
+                        "large-letter-750g": 5.50,
+                        "small-parcel-2kg": 7.00,
+                        "medium-parcel-2kg": 9.00,
+                        "medium-parcel-10kg": 13.00,
+                        "medium-parcel-20kg": 18.00,
+                    },
+                },
+                // Dummy rates for remaining zones
+                "europe-2": { /* same structure as europe-1 */ },
+                "europe-3": { /* same structure as europe-1 */ },
+                "world-1": { /* same structure as europe-1 */ },
+                "world-2": { /* same structure as europe-1 */ },
+                "world-3": { /* same structure as europe-1 */ },
+            };
+
+            // DOM elements
+            const zoneSelect = document.getElementById("zone");
+            const serviceSelect = document.getElementById("service");
+            const packageTypeSelect = document.getElementById("package-type");
+            const form = document.getElementById("calculator-form");
+            const resultDiv = document.getElementById("result");
+
+            // Form submission handler
+            form.addEventListener("submit", function (event) {
+                event.preventDefault();
+
+                const selectedZone = zoneSelect.value;
+                const selectedService = serviceSelect.value;
+                const packageType = packageTypeSelect.value;
+
+                if (
+                    !rates[selectedZone] ||
+                    !rates[selectedZone][selectedService] ||
+                    !rates[selectedZone][selectedService][packageType]
+                ) {
+                    resultDiv.innerHTML = `<p>Invalid selection. Please try again.</p>`;
+                    return;
+                }
+
+                const cost = rates[selectedZone][selectedService][packageType];
+
+                resultDiv.innerHTML = `
+            <h5>Shipping Cost:</h5>
+            <p>To send a ${selectedService.replace("-", " ").toUpperCase()} ${packageType.replace("-", " ").toUpperCase()} to ${selectedZone.toUpperCase()}</p>
+
+            <h3>Will Cost: £${cost.toFixed(2)}</h3>
+        `;
+            });
+        });
+
+
+    </script>
+    <!-- jQuery (required for Select2) -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+    <!-- Select2 JS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.1.0-beta.1/js/select2.min.js"></script>
+
+</body>
+
+</html>
