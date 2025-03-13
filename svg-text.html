@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dynamic SVG Editor - Two Lines with Font & Base64 Options</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/water.css@2/out/water.min.css">
+  <!-- Load Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;700&family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+  <style>
+    body {
+      font-family: 'Manrope', sans-serif;
+    }
+    #svg-container {
+      border: 1px solid #000;
+      display: inline-block;
+      margin-top: 20px;
+    }
+    .form-group {
+      margin-bottom: 10px;
+    }
+  </style>
+</head>
+<body>
+  <h1>Dynamic SVG Editor - Two Lines with Font & Base64 Options</h1>
+  <form id="svgForm">
+    <div class="form-group">
+      <label for="topLineText">Top Line Text:</label>
+      <input type="text" id="topLineText" value="TOP TEXT">
+    </div>
+    <div class="form-group">
+      <label for="topLineColor">Top Line Color:</label>
+      <input type="color" id="topLineColor" value="#ffffff">
+    </div>
+    <div class="form-group">
+      <label for="topFontSize">Top Font Size (px):</label>
+      <input type="number" id="topFontSize" value="30" min="10">
+    </div>
+    <div class="form-group">
+      <label for="bottomLineText">Bottom Line Text:</label>
+      <input type="text" id="bottomLineText" value="BOTTOM TEXT">
+    </div>
+    <div class="form-group">
+      <label for="bottomLineColor">Bottom Line Color:</label>
+      <input type="color" id="bottomLineColor" value="#ffffff">
+    </div>
+    <div class="form-group">
+      <label for="bottomFontSize">Bottom Font Size (px):</label>
+      <input type="number" id="bottomFontSize" value="30" min="10">
+    </div>
+    <div class="form-group">
+      <label for="backgroundColor">Background Color:</label>
+      <input type="color" id="backgroundColor" value="#0738be">
+    </div>
+    <div class="form-group">
+      <label for="fontPicker">Font Picker:</label>
+      <select id="fontPicker">
+        <option value="'Manrope', sans-serif">Manrope</option>
+        <option value="'Roboto', sans-serif">Roboto</option>
+        <option value="Arial, sans-serif">Arial</option>
+        <option value="'Times New Roman', serif">Times New Roman</option>
+        <option value="'Courier New', monospace">Courier New</option>
+      </select>
+    </div>
+    <div class="form-group">
+      <button type="button" id="updateButton">Update SVG</button>
+      <button type="button" id="downloadButton">Download SVG</button>
+      <button type="button" id="base64Button">Get Base64 HTML Code</button>
+    </div>
+    <div class="form-group">
+      <label for="base64Output">Base64 HTML Code:</label>
+      <textarea id="base64Output" rows="4" cols="50" readonly></textarea>
+    </div>
+  </form>
+
+  <div id="svg-container">
+    <svg id="dynamicSVG" width="500" height="300" viewBox="0 0 500 300" version="1.1" xmlns="http://www.w3.org/2000/svg">
+      <rect id="backgroundRect" stroke="#635FEE" stroke-width="1" fill="#0738be" x="0.5" y="0.5" width="499" height="299" rx="10"></rect>
+      <text id="topLineTextElement" font-family="Manrope, sans-serif" font-size="30" font-weight="bold" text-anchor="middle" dominant-baseline="middle" fill="#ffffff">
+        <tspan x="250" y="100">TOP TEXT</tspan>
+      </text>
+      <text id="bottomLineTextElement" font-family="Manrope, sans-serif" font-size="30" font-weight="bold" text-anchor="middle" dominant-baseline="middle" fill="#ffffff">
+        <tspan x="250" y="200">BOTTOM TEXT</tspan>
+      </text>
+    </svg>
+  </div>
+
+  <script>
+    'use strict';
+
+    document.addEventListener('DOMContentLoaded', function() {
+      // Cache form elements
+      const updateButton = document.getElementById('updateButton');
+      const downloadButton = document.getElementById('downloadButton');
+      const base64Button = document.getElementById('base64Button');
+      
+      const topLineTextInput = document.getElementById('topLineText');
+      const topLineColorInput = document.getElementById('topLineColor');
+      const topFontSizeInput = document.getElementById('topFontSize');
+      
+      const bottomLineTextInput = document.getElementById('bottomLineText');
+      const bottomLineColorInput = document.getElementById('bottomLineColor');
+      const bottomFontSizeInput = document.getElementById('bottomFontSize');
+      
+      const backgroundColorInput = document.getElementById('backgroundColor');
+      const fontPicker = document.getElementById('fontPicker');
+      const base64Output = document.getElementById('base64Output');
+
+      // Cache SVG elements
+      const backgroundRect = document.getElementById('backgroundRect');
+      const topLineTextElement = document.getElementById('topLineTextElement');
+      const bottomLineTextElement = document.getElementById('bottomLineTextElement');
+      const svgElement = document.getElementById('dynamicSVG');
+      
+      // Update SVG function with error checking
+      function updateSVG() {
+        try {
+          // Get values from form inputs
+          const topText = topLineTextInput.value;
+          const topColor = topLineColorInput.value;
+          const topFontSize = topFontSizeInput.value;
+          
+          const bottomText = bottomLineTextInput.value;
+          const bottomColor = bottomLineColorInput.value;
+          const bottomFontSize = bottomFontSizeInput.value;
+          
+          const backgroundColor = backgroundColorInput.value;
+          const fontFamily = fontPicker.value;
+          
+          // Update background rectangle color
+          if (backgroundRect) {
+            backgroundRect.setAttribute('fill', backgroundColor);
+          }
+          
+          // Update top line text, color, and font size
+          if (topLineTextElement) {
+            const tspanTop = topLineTextElement.querySelector('tspan');
+            if (tspanTop) {
+              tspanTop.textContent = topText;
+              topLineTextElement.setAttribute('fill', topColor);
+              topLineTextElement.setAttribute('font-size', topFontSize);
+              topLineTextElement.setAttribute('font-family', fontFamily);
+            }
+          }
+          
+          // Update bottom line text, color, and font size
+          if (bottomLineTextElement) {
+            const tspanBottom = bottomLineTextElement.querySelector('tspan');
+            if (tspanBottom) {
+              tspanBottom.textContent = bottomText;
+              bottomLineTextElement.setAttribute('fill', bottomColor);
+              bottomLineTextElement.setAttribute('font-size', bottomFontSize);
+              bottomLineTextElement.setAttribute('font-family', fontFamily);
+            }
+          }
+        } catch (error) {
+          console.error('Error updating SVG:', error);
+        }
+      }
+      
+      // Download SVG function with resource cleanup
+      function downloadSVG() {
+        try {
+          const serializer = new XMLSerializer();
+          const source = serializer.serializeToString(svgElement);
+          const svgBlob = new Blob([source], { type: 'image/svg+xml;charset=utf-8' });
+          const url = URL.createObjectURL(svgBlob);
+          
+          const downloadLink = document.createElement('a');
+          downloadLink.href = url;
+          downloadLink.download = 'custom.svg';
+          document.body.appendChild(downloadLink);
+          downloadLink.click();
+          document.body.removeChild(downloadLink);
+          
+          // Clean up the object URL after download
+          URL.revokeObjectURL(url);
+        } catch (error) {
+          console.error('Error downloading SVG:', error);
+        }
+      }
+      
+      // Helper function to convert string to Base64 (handling Unicode)
+      function toBase64(str) {
+        return window.btoa(unescape(encodeURIComponent(str)));
+      }
+      
+      // Generate Base64 HTML Code function
+      function generateBase64HTML() {
+        try {
+          const serializer = new XMLSerializer();
+          const source = serializer.serializeToString(svgElement);
+          const base64String = toBase64(source);
+          const htmlCode = `<img src="data:image/svg+xml;base64,${base64String}" alt="SVG Image">`;
+          base64Output.value = htmlCode;
+        } catch (error) {
+          console.error('Error generating Base64 HTML Code:', error);
+          base64Output.value = 'Error generating Base64 HTML Code.';
+        }
+      }
+      
+      // Attach event listeners
+      updateButton.addEventListener('click', updateSVG);
+      downloadButton.addEventListener('click', downloadSVG);
+      base64Button.addEventListener('click', generateBase64HTML);
+    });
+  </script>
+</body>
+</html>
