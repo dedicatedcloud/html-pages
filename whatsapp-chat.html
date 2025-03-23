@@ -6,7 +6,8 @@
     <title>WhatsApp Chat</title>
     <style>
         body {
-            font-family: Arial, sans-serif;
+            font-family: Roboto, sans-serif;
+            font-size: 15px;
             background-color: #f9f9f9;
             margin: 0;
             padding: 20px;
@@ -27,20 +28,23 @@
             margin-bottom: 15px;
         }
         .user {
-            background-color: #dcf8c6;
+            background-color: #4e4bf5;
+            color: white;
             align-self: flex-end;
             justify-content: flex-end;
             margin-left: auto;
             text-align: right;
         }
         .other {
-            background-color: #ffffff;
+            background-color: #F0F0F0;
             align-self: flex-start;
             justify-content: flex-start;
         }
         .timestamp {
             font-size: 0.8em;
+            text-align: center;
             color: gray;
+            padding: 10px;
         }
         .sender {
             font-weight: bold;
@@ -55,19 +59,27 @@
 
 <div class="chat-container">
     <div class="chat-wrapper">
+                            <div class="timestamp">31/07/2022, 22:00</div>
+
         <div class="message user">
             <div>
-                <div class="timestamp">12/12/2020, 07:58</div>
-                <div class="sender">User 1:</div>
-                <div class="text">Hi!</div>
-            </div>
+                <div class="sender">Me:</div>
+                <div class="text">Did Elliot Hayward, the DPS of Electrowerkz Night Club, call the police on you the night he ad you searched</div>
+
+           </div>
         </div>
-        
+
         <div class="message other">
             <div>
-                <div class="timestamp">14/12/2020, 06:58</div>
-                <div class="sender">Other User:</div>
-                <div class="text">Hello</div>
+                <div class="sender">Trans Customer:</div>
+                <div class="text">No he didn’t, but there are obvious reasons for that, plus I think it was illegal for male security to present while I was being stripped searched ?</div>
+
+            </div>
+        </div>
+        <div class="message user">
+            <div>
+                <div class="sender">Me:</div>
+                <div class="text">Strip searched with male security? That's not allowed and having male security present </div>
             </div>
         </div>
     </div>
