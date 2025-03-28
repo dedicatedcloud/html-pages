@@ -1,2 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Ultimate Poster Designer</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: linear-gradient(135deg, #1e3c72, #2a5298);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: start;
+      min-height: 100vh;
+      padding: 2rem;
+      color: white;
+    }
+    h1 {
+      margin-bottom: 1rem;
+    }
+    #controls {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1rem;
+      margin-bottom: 1rem;
+      justify-content: center;
+    }
+    #editor {
+      background: white;
+      color: black;
+      min-height: 400px;
+      width: 600px;
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0 0 20px rgba(0,0,0,0.3);
+      outline: none;
+      overflow-y: auto;
+    }
+    .btn-group {
+      margin-top: 1rem;
+      display: flex;
+      gap: 1rem;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+    button, select, input[type="color"] {
+      padding: 10px;
+      border: none;
+      border-radius: 5px;
+      font-weight: bold;
+      cursor: pointer;
+    }
+    #downloadBtn { background-color: #28a745; color: white; }
+    #htmlExportBtn { background-color: #007bff; color: white; }
+    #templateSelector { background: #ff9800; color: white; }
+    #fontSelector { background: #9c27b0; color: white; }
+    #bgPicker { background: white; }
+  </style>
+</head>
+<body>
+  <h1>🛠️ Ultimate Poster Designer</h1>
+  <div id="controls">
+    <select id="fontSelector">
+      <option value="Arial">Arial</option>
+      <option value="Georgia">Georgia</option>
+      <option value="Courier New">Courier New</option>
+      <option value="Verdana">Verdana</option>
+      <option value="Tahoma">Tahoma</option>
+    </select>
 
-
+    <input type="color" id="bgPicker" title="Choose Background Color" />
+
+    <input type="file" id="imageUploader" accept="image/*" title="Upload Logo or Image" />
+
+    <select id="templateSelector">
+      <option value="">Choose Template</option>
+      <option value="warning">🚨 Warning</option>
+      <option value="alert">⚠️ Alert</option>
+      <option value="quote">📝 Quote</option>
+      <option value="announcement">📢 Announcement</option>
+    </select>
+  </div>
+
+  <div id="editor" contenteditable="true">
+    <h2 style="text-align:center">🚨 Example Poster Title 🚨</h2>
+    <p>This is a custom-designed poster. You can add emojis, change text, and format it however you'd like!</p>
+    <p><strong>#Hashtag #CallToAction</strong></p>
+  </div>
+
+  <div class="btn-group">
+    <button id="downloadBtn">📥 Download as Image</button>
+    <button id="htmlExportBtn">📄 Export as HTML</button>
+  </div>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+  <script>
+    const editor = document.getElementById('editor');
+
+    document.getElementById('fontSelector').addEventListener('change', (e) => {
+      editor.style.fontFamily = e.target.value;
+    });
+
+    document.getElementById('bgPicker').addEventListener('input', (e) => {
+      editor.style.background = e.target.value;
+    });
+
+    document.getElementById('imageUploader').addEventListener('change', (e) => {
+      const file = e.target.files[0];
+      if (file && file.type.startsWith('image/')) {
+        const reader = new FileReader();
+        reader.onload = function(evt) {
+          const img = document.createElement('img');
+          img.src = evt.target.result;
+          img.style.maxWidth = '100%';
+          img.style.margin = '1rem 0';
+          editor.insertBefore(img, editor.firstChild);
+        };
+        reader.readAsDataURL(file);
+      }
+    });
+
+    document.getElementById('templateSelector').addEventListener('change', (e) => {
+      const template = e.target.value;
+      if (template === 'warning') {
+        editor.innerHTML = '<h2 style="text-align:center">🚨 URGENT WARNING 🚨</h2><p>Important notice for all concerned. Take action immediately.</p><p><strong>#SafetyFirst #CommunityAlert</strong></p>';
+      } else if (template === 'alert') {
+        editor.innerHTML = '<h2 style="text-align:center">⚠️ ALERT ⚠️</h2><p>Please be advised of the following situation.</p><p><strong>#Alert #BeAware</strong></p>';
+      } else if (template === 'quote') {
+        editor.innerHTML = '<blockquote style="font-style: italic; border-left: 5px solid #ccc; padding-left: 10px;">"Your most valuable asset is your voice. Use it."</blockquote><p style="text-align:right;">— Unknown</p>';
+      } else if (template === 'announcement') {
+        editor.innerHTML = '<h2 style="text-align:center">📢 PUBLIC ANNOUNCEMENT</h2><p>We are sharing this message with our community for your attention.</p><p><strong>#Announcement #Community</strong></p>';
+      }
+    });
+
+    document.getElementById('downloadBtn').addEventListener('click', () => {
+      html2canvas(editor).then(canvas => {
+        const link = document.createElement('a');
+        link.download = 'poster.png';
+        link.href = canvas.toDataURL();
+        link.click();
+      });
+    });
+
+    document.getElementById('htmlExportBtn').addEventListener('click', () => {
+      const htmlContent = editor.innerHTML;
+      const blob = new Blob([`<div>${htmlContent}</div>`], { type: 'text/html' });
+      const link = document.createElement('a');
+      link.download = 'poster.html';
+      link.href = URL.createObjectURL(blob);
+      link.click();
+    });
+  </script>
+</body>
+</html>
+
