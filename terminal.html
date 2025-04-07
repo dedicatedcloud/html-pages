@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<style>
+@-webkit-keyframes blink{50%{opacity:0}}@keyframes blink{50%{opacity:0}}@keyframes remove{to{max-width:0;max-height:0;overflow:hidden;margin:-5px 0 0;padding:0;line-height:0;position:absolute;top:0}}@-webkit-keyframes remove{to{max-width:0;max-height:0;visibility:hidden;margin:-5px 0 0;padding:0;line-height:0;position:absolute;top:0}}@keyframes onetext{0%,20%,81%,to{color:#4cf679}21%,80%{color:#fff}}@-webkit-keyframes onetext{0%,20%,81%,to{color:#4cf679}21%,80%{color:#fff}}@keyframes twotext{0%,20%,41%,60%,81%,to{color:#fff}21%,40%,61%,80%{color:#4cf679}}@-webkit-keyframes twotext{0%,20%,41%,60%,81%,to{color:#fff}21%,40%,61%,80%{color:#4cf679}}@keyframes threetext{0%,40%,61%,to{color:#fff}41%,60%{color:#4cf679}}@-webkit-keyframes threetext{0%,40%,61%,to{color:#fff}41%,60%{color:#4cf679}}@keyframes highlightone{0%,50.9%{color:#0b0e2d;background-color:#fff}51%,to{color:#fff;background-color:#0b0e2d}}@-webkit-keyframes highlightone{0%,50.9%{color:#0b0e2d;background-color:#fff}51%,to{color:#fff;background-color:#0b0e2d}}@keyframes highlighttwo{0%,50.9%{color:#fff;background-color:#0b0e2d}51%,to{color:#0b0e2d;background-color:#fff}}@-webkit-keyframes highlighttwo{0%,50.9%{color:#fff;background-color:#0b0e2d}51%,to{color:#0b0e2d;background-color:#fff}}@keyframes typing{0%{width:0}to{width:100%}}@keyframes blink-caret{0%,to{border-color:transparent}50%{border-color:#fff}}@keyframes kill-caret{0%,99.9%{border:inherit}to{border:0}}@keyframes typingcmd{0%{width:0}to{width:223px}}@keyframes blink-caretcmd{0%,to{border-color:transparent}50%{border-color:#fff}}@keyframes kill-caretcmd{0%,99.9%{border:inherit}to{border:0}}@keyframes fastprog{0%{width:0%}to{width:70%}}@keyframes blink-fastprog{0%,to{border-color:transparent}50%{border-color:#fff}}@keyframes kill-fastprog{0%,99.9%{border:inherit}to{border:0}}@keyframes fadeIn{0%,70%{opacity:0;margin-top:20px}to{opacity:1;margin-top:0}}@-moz-keyframes fadeIn{0%,70%{opacity:0;margin-top:20px}to{opacity:1;margin-top:0}}@-webkit-keyframes fadeIn{0%,70%{opacity:0;margin-top:20px}to{opacity:1;margin-top:0}}@-o-keyframes fadeIn{0%,70%{opacity:0;margin-top:20px}to{opacity:1;margin-top:0}}@-ms-keyframes fadeIn{0%,70%{opacity:0;margin-top:20px}to{opacity:1;margin-top:0}}@font-face{font-family:"sf_monoregular";src:url(fonts/sfmono-regular-webfont.woff2)format("woff2"),url(fonts/sfmono-regular-webfont.woff)format("woff");font-weight:400;font-style:normal}:root{--color-bg:#252a33;--color-text:#eee;--color-text-subtle:#0de0cf}.calloutCyan{color:#0de0cf}.sucessGreen{color:#4cf679}.multiBlue{color:#1875ff}.tertiary{color:#7278ac}.black{color:#0b0e2d}.yellow{color:#fcd012}.errorRed{color:#dc6466}.multiOrange{color:#f6944d}@media only screen and (max-width:540px){.container{max-width:90%!important;word-break:break-word!important}.termynal{padding:12px 32px!important;max-width:85%!important;margin:10px 0 35px!important;font-size:14px}.term-header{padding:46px 28px 36px 32px!important}[data-ty=progress]{font-size:10px!important}.term-title{width:auto!important;font-size:19px!important;margin-top:20px!important}.term-icon{position:absolute!important;right:22px!important;top:14px!important}[data-ty].wide{word-wrap:break-all!important}}.container{max-width:564px;width:100%;margin:20px;background:#0b0e2d;color:var(--color-text);font-size:18px;font-family:"sf_monoregular",Consolas,Menlo,Monaco,"Courier New",Courier,monospace;border-radius:24px;position:relative;-webkit-box-sizing:border-box;box-sizing:border-box}.container:before{content:"";position:absolute;top:30px;left:30px;display:inline-block;width:15px;height:15px;border-radius:50%;background:#fa5f5f;-webkit-box-shadow:25px 0 0#fcd012,50px 0 0#a8e70e;box-shadow:25px 0 0#fcd012,50px 0 0#a8e70e}.container:after{content:"";position:absolute;color:var(--color-text-subtle);top:5px;left:0;width:100%;text-align:center}.term-header{border-bottom:1px solid #1b235e;padding:46px 28px 46px 60px;display:block;height:32px}.term-title{font-size:28px;width:auto;display:inline;float:left;margin:16px 0;font-weight:600}#aws .term-title{font-size:24px}.term-icon{width:20%;display:inline;float:right;text-align:right;margin-top:8px;max-width:54px}#github .term-icon{margin-top:0}.termynal{max-width:444px;height:320px;padding:0 60px 30px;margin:15px 0 25px;overflow:hidden;bottom:0;font-size:15px;width:100%}[data-ty].left-block{display:inline;float:left;margin:0 12px 0 0}[data-ty].right-block{display:inline;margin:0}[data-ty].list{margin:0}[data-ty],[data-ty].spacer:before{margin:20px 0}[data-ty]{display:block;line-height:22px}[data-ty]:before{content:"";display:inline-block;vertical-align:middle;margin:0}[data-ty-prompt]:before,[data-ty=input]:before{margin-right:20px;color:var(--color-text-subtle)}[data-ty=input]:before{content:"$"}[data-ty][data-ty-prompt]:before{content:attr(data-ty-prompt)}[data-ty-cursor]:after{content:attr(data-ty-cursor);font-family:monospace;margin-left:.5em;-webkit-animation:blink 1s infinite;animation:blink 1s infinite}[data-ty=progress]{font-size:13px}[data-ty][data-ty-prompt].progress-bar:before{display:none!import}.options:before{display:none}.options-long,.options-med,.options-short,[data-ty].options-long,[data-ty].options-med,[data-ty].options-short{-moz-animation:remove 0s ease-in 2s forwards;-webkit-animation:remove 0s ease-in 2s forwards;-o-animation:remove 0s ease-in 2s forwards;animation:remove 0s ease-in 2s forwards;-webkit-animation-fill-mode:forwards;animation-fill-mode:forwards;max-height:300px;max-width:700px}.options-long,.options-med,[data-ty].options-long,[data-ty].options-med{-moz-animation:remove 0s ease-in 2.4s forwards;-webkit-animation:remove 0s ease-in 2.4s forwards;-o-animation:remove 0s ease-in 2.4s forwards;animation:remove 0s ease-in 2.4s forwards}.options-long,[data-ty].options-long{-moz-animation:remove 0s ease-in 3.2s forwards;-webkit-animation:remove 0s ease-in 3.2s forwards;-o-animation:remove 0s ease-in 3.2s forwards;animation:remove 0s ease-in 3.2s forwards}.option-1 .arrow,.option-1 .text,.option-2 .arrow,.option-2 .text{-webkit-animation-duration:3s;-moz-animation-duration:3s;-o-animation-duration:3s}.option-1 .arrow,.option-1 .text{-webkit-animation-name:onetext;-webkit-animation-iteration-count:1;-moz-animation-name:onetext;-moz-animation-iteration-count:1;-o-animation-name:onetext;-o-animation-iteration-count:1;color:#4cf679}.option-2 .arrow,.option-2 .text{-webkit-animation-name:twotext;-moz-animation-name:twotext;-o-animation-name:twotext;color:#fff}.highlight1,.highlight2,.option-2 .arrow,.option-2 .text,.option-3 .arrow,.option-3 .text{-webkit-animation-iteration-count:1;-moz-animation-iteration-count:1;-o-animation-iteration-count:1}.option-3 .arrow,.option-3 .text{-webkit-animation-name:threetext;-webkit-animation-duration:3s;-moz-animation-name:threetext;-moz-animation-duration:3s;-o-animation-name:threetext;-o-animation-duration:3s;color:#fff}.highlight1,.highlight2{-webkit-animation-name:highlightone;-webkit-animation-duration:2.5s;-moz-animation-name:highlightone;-moz-animation-duration:2.5s;-o-animation-name:highlightone;-o-animation-duration:2.5s;width:200px}.highlight2{-webkit-animation-name:highlighttwo;-moz-animation-name:highlighttwo;-o-animation-name:highlighttwo}.fast-progress,.multiline-command,.type-title{overflow:hidden;border-right:15px solid #fff;white-space:nowrap;text-align:left;margin:0;animation:typing 1.5s steps(20,end),blink-caret .75s step-end infinite,kill-caret 0s ease-in 2.5s forwards}.fast-progress,.multiline-command{border-right:0 solid #fff;display:inline-block;vertical-align:middle;animation:typingcmd 1.5s steps(20,end),blink-caretcmd .75s step-end infinite,kill-caretcmd 0s ease-in 2.5s forwards}.fast-progress{animation:fastprog 1s steps(20,end),blink-fastprog .75s step-end infinite,kill-fastprog 0s ease-in 1.5s forwards;max-width:70%}.fade-in{animation:fadeIn ease 1.2s;-webkit-animation:fadeIn ease 1.2s;-moz-animation:fadeIn ease 1.2s;-o-animation:fadeIn ease 1.2s;-ms-animation:fadeIn ease 1.2s}
+  </style>
+  </head>
+
+<body>
+
+  <div id="github" class="container">
+    <div class="term-header">
+      <div class="term-title">
+        <div class="type-title">
+          <span class="calloutCyan">▲</span> Hello <span class="calloutCyan">Cunt</span>
+        </div>
+      </div>
+      <div class="term-icon">
+        <div class="fade-in">
+          <img src="https://4.bp.blogspot.com/-SeZlk6ey3Aw/XJa096EkL8I/AAAAAAAAJaE/DJQojQEZoJ8JN9bJciFeUj57xOKldzD2ACK4BGAYYCw/s1600/logo%2Belastic%2Bsearch%2Bicon.png" height="40" />
+          </svg>
+
+        </div>
+      </div>
+    </div>
+
+    <div id="termynal" data-termynal class="termynal" data-ty-startDelay="2000" data-ty-typeDelay="40" data-ty-lineDelay="700">
+
+      <div id="github" class="container">
+        <div class="term-header"></div>
+        <div id="termynal" data-termynal class="termynal" data-ty-typeDelay="40" data-ty-lineDelay="700">
+
+          <div id="github" class="container">
+            <div class="term-header"></div>
+            <div id="termynal" data-termynal class="termynal" data-ty-typeDelay="40" data-ty-lineDelay="700">
+
+              <span data-ty>Welcome team. Let's review our development</span>
+
+              <span data-ty data-ty-delay="1000">📊 What metrics would you like to review?</span>
+
+              <span data-ty data-ty-delay="0" class="options-long" data-ty-cursor="▋">
+                <span class="tertiary">(Use arrow keys or type to search)</span>
+              </span>
+
+              <span data-ty data-ty-delay="3200" class="options wide">
+                <span class="option-1"><span class="arrow">➔</span> <span class="text">Recent Ops usage</span></span><br>
+                <span class="option-2"><span class="arrow">➔</span> <span class="text">Database logs</span></span><br>
+                <span class="option-3"><span class="arrow">➔</span> <span class="text">Release Cadence</span></span> <br>➔ Website Uptime<br>➔ Developement Velocity<br>
+              </span>
+
+              <span data-ty style="color:#a2a2a2">Recent Ops Usage</span>
+
+              <span data-ty>Would you like to see Ops run in the past <span style="color:#a2a2a2" ;>24</span> hours</span>
+
+              <span data-ty="input" data-ty-typeDelay="1000" data-ty-prompt="(Y/n)">Y</span>
+
+              <span data-ty>Pulling ops usage metrics...</span>
+
+              <span data-ty="progress" class="calloutCyan"></span>
+
+              <span data-ty><br>
+                <span class="calloutCyan">Nico Alimin </span> <span class="sucessGreen">ops run deploy <br>Sept 17 14:03:18<br>
+                  <span class="calloutCyan"> Nico Alimin ran </span> ops run issue:done<span class="sucessGreen"> <br>Sept 17 14:03:12 </span><br>
+                  <span class="calloutCyan"> Matt Robinson ran </span> ops run metric<span class="sucessGreen"> <br>Sept 17 12:06:43 </span><br>
+                  <span class="calloutCyan"> Nico Alimin ran </span> ops run issue:start<span class="sucessGreen"> <br>Sept 17 09:43:26 </span><br>
+                  <span class="calloutCyan"> Nico Alimin ran </span> ops run provision:aws<span class="sucessGreen"> <br>Sept 16 20:30:11 </span>
+
+                </span>
+
+                <!-- include and initialise termynal.js -->
+                <script>
+                  // https://github.com/ines/termynal 
+                  var termynal = new Termynal('#termynal');
+                  /** fix scroll to bottom  **/
+                  function updateScroll() {
+                    var element = document.getElementById("termynal");
+                    element.scrollTop = element.scrollHeight;
+                  }
+                  //pull down
+                  setInterval(updateScroll, 100);
+                  /** Clear the Termynal **/
+                  function closeClearDiv() {
+                    var cleardiv = document.getElementsByClassName('clear'),
+                      i;
+                    for (i = 0; i < cleardiv.length; i += 1) {
+                      cleardiv[i].style.display = 'none';
+                    }
+                  }
+                  // clears the termynal when needed
+                  window.setTimeout(closeClearDiv, 8700);
+                  window.setTimeout(closeClearDiv, 16500);
+                </script>
+
+</body>
+
+</html>
